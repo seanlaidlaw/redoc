@@ -155,7 +155,7 @@ redoc_extract_code <- function(docx) {
   codelist
 }
 
-#' @importFrom stringi stri_replace_first_fixed stri_detect_fixed stri_join
+#' @importFrom stringi stri_split_fixed stri_replace_first_fixed stri_detect_fixed stri_join
 restore_code <- function(md, codelist, missing) {
   if (!length(codelist)) return(md)
   codelist <- sort_by(codelist, "lineno")
@@ -168,9 +168,7 @@ restore_code <- function(md, codelist, missing) {
     marker_line <- stri_lineno_first_fixed(md, marker)
     if (!is.na(marker_line)) {
       last_detected_end <- marker_line + stri_count_lines(item$code)
-      md <- stri_replace_first_fixed(md, marker, item$code,
-        vectorize_all = FALSE
-      )
+      md <- stri_replace_first_fixed(md, marker, item$code)
       md <- stri_replace_all_fixed(md, marker, "")
     } else if (missing != "omit") {
       if (missing == "comment") {

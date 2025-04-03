@@ -13,7 +13,7 @@
 #' @param line_numbers either TRUE or list with any of the arguments `start`,
 #'   `by`, `restart`, and `distance`
 #' @param comment_author The name to attribute any CriticMarkup tracked
-#'   changes to. Defaults to [whoami::fullname()].
+#'   changes to. Defaults to whoami.
 #' @param keep_md whether to keep the intermediate markdown document
 #' @param wrappers a list of wrapper functions to capture text to protect when
 #'   rendering and de-rendering.  See [make_wrapper()].

@@ -13,18 +13,18 @@
 #'
 #' @param md markdown input with critic markup, a length-1 character vector
 #' @param author Name to attribute Critic Markup changes to. If NULL,
-#'   defaults to system user information via [whoami::fullname()].
+#'   defaults to system user information via whoami.
 #' @return A character vector of markdown, split by lines
 #' @noRd
-#' @importFrom whoami fullname username
 #' @importFrom stringi stri_replace_all_regex stri_replace_first_fixed stri_join
 #' stri_extract_all_regex
 criticmarkup_to_pandoc <- function(md, author = NULL) {
   if (is.null(author)) {
-    author <- fullname(fallback = username(fallback = "R User"))
+    author <- system("whoami", intern = TRUE)
   }
 
-  timestamp <- as.character(Sys.time(), format = "%Y-%m-%dT%H:%M:%SZ")
+
+  timestamp <- format(Sys.time(), format = "%Y-%m-%dT%H:%M:%SZ")
 
   captures <- c(
     insertion = "(?s)\\{\\+\\+(.*?)\\+\\+\\}",
